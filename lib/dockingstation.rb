@@ -5,4 +5,8 @@ def release_bike
   Bike.new
 end
 
+def receive_bike
+  Bike.new 
+end
+
 end
