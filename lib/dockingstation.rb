@@ -5,8 +5,18 @@ def release_bike
   Bike.new
 end
 
-def receive_bike
-  Bike.new 
+def dock(bike)
+  @bike = bike
 end
+
+attr_reader :bike
+
+#def bike
+#  @bike
+#end
+
+#def receive_bike
+#  Bike.new
+#end
 
 end
