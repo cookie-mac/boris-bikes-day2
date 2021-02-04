@@ -6,9 +6,11 @@ describe Docking_Station do
     expect(subject).to respond_to(:release_bike)
   end
 
-  it "gets a bike & expects tyhe bike to be working" do
+  it "gets a bike & expects the bike to be working" do
+    if @docked_bike != nil
     bike = subject.release_bike
     expect(bike).to be_working
+  end
   end
 
   it "responds to dock" do
@@ -25,7 +27,18 @@ describe Docking_Station do
     subject.dock(bike) # bike is docked
     expect(subject.docked_bike).to eq(bike) #  returns bike from line above
   end
-  
+
+
+  #chapter 12
+  it "fails to release bike, if none are available" do
+      if subject.docked_bike == nil
+        expect { subject.release_bike }.to raise_error "No bikes available"
+      end
+      #subject.docked_bikes.empty?
+      #expect { subject.release_bike }.to raise_error |error|
+      #1.should == 2
+    end
+
 
 
 =begin
