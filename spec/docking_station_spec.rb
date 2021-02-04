@@ -39,6 +39,13 @@ describe Docking_Station do
       #1.should == 2
     end
 
+  it "fails to dock a bike, if the docking station is full (already has 1 bike in it)" do
+    if subject.docked_bike != nil
+      bike = Bike.new
+      expect { subject.dock(bike) }.to raise_error "Docking Station is full"
+    end
+  end
+
 
 
 =begin

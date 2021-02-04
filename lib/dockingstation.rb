@@ -17,6 +17,10 @@ def dock(bike)
   @docked_bike = bike
 end
 
+#def capacity
+#  @capacity = 1
+#end
+
 #def docked_bike
 #  @docked_bike
 #end
