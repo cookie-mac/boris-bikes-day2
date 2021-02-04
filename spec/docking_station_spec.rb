@@ -15,7 +15,21 @@ describe Docking_Station do
     expect(subject).to respond_to(:dock).with(1).argument
   end
 
-  it 'responds to bike' do
+  it "responds to bike" do
+    expect(subject).to respond_to(:docked_bike)
+  end
+
+# does docked bikes return the docked bike (ID)
+  it 'returns the docked bike' do
+    bike = Bike.new     # creates bike
+    subject.dock(bike) # bike is docked
+    expect(subject.docked_bike).to eq(bike) #  returns bike from line above
+  end
+  
+
+
+=begin
+   it 'responds to bike' do
     expect(subject).to respond_to(:bike)
   end
 
@@ -24,6 +38,7 @@ describe Docking_Station do
     subject.dock(bike)
     expect(subject.dock(bike)).to eq(bike)
   end
+=end
 
   #it { is_expected.to respond_to(:dock).with(1).argument }
 
