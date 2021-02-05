@@ -2,71 +2,59 @@ require 'dockingstation'
 require 'bike'
 
 describe Docking_Station do
+  
   it "expects docking station class instances to respond to release_bike" do
     expect(subject).to respond_to(:release_bike)
   end
 
-  it "gets a bike & expects the bike to be working" do
-    if @docked_bike != nil
-    bike = subject.release_bike
-    expect(bike).to be_working
+  describe "#release_bike" do
+    it "releases a bike" do
+      bike = Bike.new
+      subject.dock(bike)
+      expect(subject.release_bike).to eq bike
+    end
   end
+
+  describe "#release_bike" do
+    it 'raises an error when there are no bikes available' do
+      expect { subject.release_bike }.to raise_error "No bikes available"
+    end
+  end
+
+
+  it "gets a bike & expects the bike to be working" do
+    bike = Bike.new
+    expect(bike).to be_working
   end
 
   it "responds to dock" do
     expect(subject).to respond_to(:dock).with(1).argument
   end
 
-  it "responds to bike" do
-    expect(subject).to respond_to(:docked_bike)
-  end
-
-# does docked bikes return the docked bike (ID)
-  it 'returns the docked bike' do
-    bike = Bike.new     # creates bike
-    subject.dock(bike) # bike is docked
-    expect(subject.docked_bike).to eq(bike) #  returns bike from line above
-  end
-
-
-  #chapter 12
-  it "fails to release bike, if none are available" do
-      if subject.docked_bike == nil
-        expect { subject.release_bike }.to raise_error "No bikes available"
-      end
-      #subject.docked_bikes.empty?
-      #expect { subject.release_bike }.to raise_error |error|
-      #1.should == 2
-    end
-
-  it "fails to dock a bike, if the docking station is full (already has 1 bike in it)" do
-    if subject.docked_bike != nil
+  describe "#dock" do
+    it 'raises an error when the docking station is full' do
+      docking_station = Docking_Station.new
       bike = Bike.new
-      expect { subject.dock(bike) }.to raise_error "Docking Station is full"
+      bike2 = Bike.new
+      docking_station.dock(bike)
+      expect { docking_station.dock(bike2) }.to raise_error "The docking station is full"
     end
   end
 
-
-
-=begin
-   it 'responds to bike' do
+  it "responds to bike" do
     expect(subject).to respond_to(:bike)
   end
 
-  it 'returns the bike stored in it' do
+# does docked bikes return the docked bike (ID)
+  it 'docks the bike' do
+    bike = Bike.new     # creates bike
+    expect(subject.dock(bike)).to eq(bike) #  returns bike from line above
+  end
+
+  it "returns the docked bike" do
     bike = Bike.new
     subject.dock(bike)
-    expect(subject.dock(bike)).to eq(bike)
+    expect(subject.bike).to eq bike
   end
-=end
-
-  #it { is_expected.to respond_to(:dock).with(1).argument }
-
-  #it "docking station toi respond to receive_bike method" do
-  #  expect(subject).to respond_to (:receive_bike)
-  #end
-
-  #it "expect bike to be returned / docked" do
-  #end
 
 end
