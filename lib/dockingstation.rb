@@ -1,10 +1,21 @@
 require_relative './bike'
 
 class Docking_Station
+=begin
+puts "How many bikes would you like this station to hold?"
+@capacity = gets.chomp
+=end
+
   DEFAULT_CAPACITY = 20
-  #attr_reader :bike
+  attr_reader :capacity
+
+  #def capacity
+  #  @capacity
+  #end
+
   def initialize
     @bikes = []
+    @capacity = DEFAULT_CAPACITY
   end
 
 def release_bike
@@ -18,6 +29,7 @@ def dock(bike)
 end
 
   private
+    #attr_reader :bikes
     def full?
       @bikes.count >= DEFAULT_CAPACITY
   end
