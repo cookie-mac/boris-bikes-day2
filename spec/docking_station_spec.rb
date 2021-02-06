@@ -2,17 +2,17 @@ require 'dockingstation'
 require 'bike'
 
 describe Docking_Station do
-=begin
-THIS TEST CAN HELP TO ALLOW USER TO DEFINE SIZE OF DOCKING STATION
-  it "allows the user to define the capacity when created" do
-    expect(Docking_Station).to respond_to (:new).with(1).argument
-  end
-=end
 
-  it "has a default capacity of 20" do
+  it "has a default capacity of DEFAULT_CAPACITY" do
     docking_station = Docking_Station.new
     expect(docking_station.capacity).to eq Docking_Station::DEFAULT_CAPACITY
   end
+
+  it "allows user to input a specified capacity upon intialize" do
+    station = Docking_Station.new(10)
+    expect(station.capacity).to eq 10
+  end
+
 
   it "expects docking station class instances to respond to release_bike" do
     expect(subject).to respond_to(:release_bike)
@@ -41,34 +41,17 @@ THIS TEST CAN HELP TO ALLOW USER TO DEFINE SIZE OF DOCKING STATION
   end
 
   describe "#dock" do
-
-
     it 'raises an error when the docking station is full' do
       docking_station = Docking_Station.new
       Docking_Station::DEFAULT_CAPACITY.times do
           docking_station.dock(Bike.new)
       end
-      #20.times { docking_station.dock(Bike.new) }
       expect { docking_station.dock(Bike.new) }.to raise_error "The docking station is full"
-
     end
   end
-=begin
-  it "responds to bike" do
-    expect(subject).to respond_to(:bikes)
-  end
-=end
 
-# does docked bikes return the docked bike (ID)
   it 'docks the bike' do
-    bike = Bike.new     # creates bike
+    bike = Bike.new
     expect(subject.dock(bike)).to eq([bike]) #  returns bike from line above
   end
-=begin
-  it "returns the docked bike" do
-    bike = Bike.new
-    subject.dock(bike)
-    expect(subject.bike).to eq bike
-  end
-=end
 end

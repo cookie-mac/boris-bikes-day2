@@ -13,9 +13,9 @@ puts "How many bikes would you like this station to hold?"
   #  @capacity
   #end
 
-  def initialize
+  def initialize(required_capacity = DEFAULT_CAPACITY)
     @bikes = []
-    @capacity = DEFAULT_CAPACITY
+    @capacity = required_capacity
   end
 
 def release_bike
@@ -31,7 +31,7 @@ end
   private
     #attr_reader :bikes
     def full?
-      @bikes.count >= DEFAULT_CAPACITY
+      @bikes.count >= @capacity
   end
 
   def empty?
