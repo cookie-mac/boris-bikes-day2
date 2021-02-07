@@ -25,7 +25,13 @@ end
 
 def dock(bike)
   fail "The docking station is full" if full?
-  @bikes << bike
+  if bike.broken?
+    @bikes.insert(0, bike)
+  else
+    @bikes << bike
+  end
+  #puts "Is the bike broken? Y/N"
+#  broken_answer = gets.chomp
 end
 
   private
@@ -35,7 +41,7 @@ end
   end
 
   def empty?
-    @bikes.empty?
+    @bikes.empty? || @bikes[-1].broken?
   end
 
 end
